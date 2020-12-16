@@ -116,7 +116,6 @@ RUN git clone -b master --single-branch https://github.com/kivy/python-for-andro
 WORKDIR /
 
 ADD build.sh /root/build.sh
-ADD prepare_env.sh /root/prepare_env.sh
-RUN chmod 755 /root/build.sh /root/prepare_env.sh
+RUN chmod 755 /root/build.sh
 
 WORKDIR /app
