@@ -85,8 +85,18 @@ function auto_accept_sdk_license() {
 
 cd /app/build || exit
 
+# Create requirements.txt from existing Pipfile.lock in /app/build or /app
+# (in this order of precedence)
+if [ -r /app/build/Pipfile.lock ]; then
+  cd /app/build || { echo "ERROR: Could not cd into /app/build"; exit 1; }
+  pipenv lock --dev -r --keep-outdated > requirements.txt
+  cd - || exit 1
+elif [ -r /app/Pipfile.lock ]; then
+  cd /app || { echo "ERROR: Could not cd into /app"; exit 1; }
+  pipenv lock --dev -r --keep-outdated > build/requirements.txt
+  cd - || exit 1
+fi
 # Install Python requirements from the project
-cd /app/build || exit
 python -m pip install --pre -r requirements.txt
 cd - || exit
 
