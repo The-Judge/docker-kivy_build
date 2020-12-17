@@ -126,7 +126,7 @@ if [ "${dest_archs}" != 0 ]; then
     echo "INFO: Running build for arch ${arch}"
     if [ ! -f "/app/build/buildozer.spec.${arch}" ]; then
       if [ -f /app/build/buildozer.spec ]; then
-        cp /app/build/buildozer.spec "/app/build/buildozer.spec.${arch}"
+        cp -fv /app/build/buildozer.spec "/app/build/buildozer.spec.${arch}"
         switch_android_arch ${arch} "/app/build/buildozer.spec.${arch}"
         switch_ant_path "/app/build/buildozer.spec.${arch}"
         switch_sdk_path "/app/build/buildozer.spec.${arch}"
@@ -143,6 +143,7 @@ if [ "${dest_archs}" != 0 ]; then
       mv -fv /app/build/buildozer.spec /app/build/buildozer.spec.tmpl_orig
     fi
     ln -sv "buildozer.spec.${arch}" /app/build/buildozer.spec
+    cd /app/build || exit 1
     buildozer -v android "${1:-debug}"
     cleanup
   done
@@ -157,6 +158,7 @@ else
     switch_p4a_path /app/build/buildozer.spec
     warn_on_root_disable /app/build/buildozer.spec
     auto_accept_sdk_license /app/build/buildozer.spec
+    cd /app/build || exit 1
     buildozer -v android "${1:-debug}"
     cleanup
   else
