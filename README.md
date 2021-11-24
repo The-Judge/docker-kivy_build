@@ -1,5 +1,8 @@
 # kivy_build
-This repo homes a Docker image which supports a developer to build Kivy Android apps using buildozer and pre-fetched SDK, NDK and files to optimize download of resources.
+This repo homes a Docker image, which supports a developer to build Kivy Android apps using buildozer and pre-fetched SDK, NDK and files to optimize download of resources.
+
+* [GitHub](https://github.com/The-Judge/docker-kivy_build/)
+* [Docker Hub](https://hub.docker.com/repository/docker/derjudge/kivy_apk_build/)
 
 # Start the build container
 
